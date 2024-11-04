@@ -1,7 +1,9 @@
 import pygame
 import time
+import random
 
 pygame.init()
+
 # functions
 def message(fonts, msg, color, posx, posy):
     #render(text, antialias, color, background=None)
@@ -18,12 +20,12 @@ clock = pygame.time.Clock()
 #Fonts
 #StsFont(글꼴, size, bold=False, italic=False)
 #print(pygame.font.get_fonts())
-font_gameOver = pygame.font.SysFont(none, 50)
-font_madeBy = pygame.font.SysFont(none, 20)
+font_gameOver = pygame.font.SysFont(None, 50)
+font_madeBy = pygame.font.SysFont(None, 20)
 
 # colors
 BLUE = (0,0,255); RED = (255,0,0); WHITE = (255,255,255)
-BLACK = (0,0,0)
+BLACK = (0,0,0); GRAY = (127,127,127); YELLOW = (255,255,0)
 
 #screen
 SCR_WIDTH, SCR_HEIGHT = 800, 600
@@ -32,10 +34,15 @@ pygame.display.set_caption('Snake Game')
 
 #snake
 snake_size = 10
+snake_speed = 5
 snake_pos_x = int(SCR_WIDTH/2 - snake_size/2)
 snake_pos_y = int(SCR_HEIGHT/2 - snake_size/2)
 snake_posx_change = 0
 snake_posy_change = 0
+
+# food
+foodx = None
+foody = None
 
 running = True
 while running:
@@ -43,17 +50,17 @@ while running:
         #print(event)
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pgame.KEYDOWN:
-            if event.kay == pygame.K_UP:
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
                 snake_posy_change = 0
                 snake_posy_change = -10
-            if event.kay == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN:
                 snake_posy_change = 0
                 snake_posy_change = 10
-            if event.kay == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT:
                 snake_posy_change = -10
                 snake_posy_change = 0
-            if event.kay == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT:
                 snake_posy_change = 10
                 snake_posy_change = 0
     snake_pos_x += snake_posx_change
@@ -70,8 +77,8 @@ while running:
     pygame.display.flip()
     clock.tick(30)
 
-    message(font_gameOver, 'Game Over', RED, int(Scr_WIDTH/2), int(SCR_HEIGHT/2))
-    message(font_gameBY, 'made by com3226', GRAy, int(Scr_WIDTH/2), int(SCR_HEIGHT/2) + 30)
+    message(font_gameOver, 'Game Over', RED, int(SCR_WIDTH/2), int(SCR_HEIGHT/2))
+    message(font_madeBy, 'made by com3226', GRAY, int(SCR_WIDTH/2), int(SCR_HEIGHT/2) + 30)
     pygame.display.update()
     time.sleep(2)
 pygame.quit()
